@@ -15,10 +15,7 @@
   imports = [
     ./hardware.nix
     ./users.nix
-    ../../modules/amd-drivers.nix
     ../../modules/nvidia-drivers.nix
-    ../../modules/nvidia-prime-drivers.nix
-    ../../modules/intel-drivers.nix
     ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
   ];
@@ -58,7 +55,7 @@
 	    canTouchEfiVariables = true;
   	  };
 
-    loader.timeout = 1;    
+    loader.timeout = 10;    
   			
     # Bootloader GRUB
     #loader.grub = {
@@ -102,16 +99,10 @@
 
 
   # Extra Module Options
-  drivers.amdgpu.enable = true;
-  drivers.intel.enable = true;
-  drivers.nvidia.enable = false;
-  drivers.nvidia-prime = {
-    enable = false;
-    intelBusID = "";
-    nvidiaBusID = "";
-  };
+  drivers.nvidia.enable = true;
+
   vm.guest-services.enable = false;
-  local.hardware-clock.enable = false;
+  local.hardware-clock.enable = true;
 
   # networking
   networking.networkmanager.enable = true;
@@ -119,7 +110,7 @@
   networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 
   # Set your time zone.
-  time.timeZone = "Asia/Seoul";
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -403,7 +394,7 @@
   #  disabledDefaultBackends = [ "escl" ];
   #};
 
-  # Extra Logitech Support
+  # Extra Logitech Supportdd
   hardware.logitech.wireless.enable = false;
   hardware.logitech.wireless.enableGraphical = false;
 

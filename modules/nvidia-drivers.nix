@@ -9,7 +9,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.xserver.videoDrivers = [ "nvidia" ];
+
+# Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
     
   hardware.graphics = {
   	enable = true;

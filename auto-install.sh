@@ -67,15 +67,6 @@ if hostnamectl | grep -q 'Chassis: vm'; then
 fi
 printf "\n%.0s" {1..1}
 
-# Checking if system has nvidia gpu and enable in default config.nix
-if command -v lspci > /dev/null 2>&1; then
-  # lspci is available, proceed with checking for Nvidia GPU
-  if lspci -k | grep -A 2 -E "(VGA|3D)" | grep -iq nvidia; then
-    echo "${NOTE} Nvidia GPU detected. Setting up for nvidia..."
-    sed -i '/drivers\.nvidia\.enable = false;/s/drivers\.nvidia\.enable = false;/ drivers.nvidia.enable = true;/' hosts/default/config.nix
-  fi
-fi
-
 echo "-----"
 printf "\n%.0s" {1..1}
 
