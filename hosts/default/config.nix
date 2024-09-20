@@ -16,7 +16,6 @@
     ./hardware.nix
     ./users.nix
     ../../modules/nvidia-drivers.nix
-    ../../modules/vm-guest-services.nix
     ../../modules/local-hardware-clock.nix
   ];
 
@@ -28,8 +27,6 @@
       "systemd.mask=systemd-vconsole-setup.service"
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
       "nowatchdog" 
-      "modprobe.blacklist=sp5100_tco" #watchdog for AMD
-      "modprobe.blacklist=iTCO_wdt" #watchdog for Intel
  	  ];
 
     # This is for OBS Virtual Cam Support
@@ -101,7 +98,6 @@
   # Extra Module Options
   drivers.nvidia.enable = true;
 
-  vm.guest-services.enable = false;
   local.hardware-clock.enable = true;
 
   # networking
@@ -394,9 +390,6 @@
   #  disabledDefaultBackends = [ "escl" ];
   #};
 
-  # Extra Logitech Supportdd
-  hardware.logitech.wireless.enable = false;
-  hardware.logitech.wireless.enableGraphical = false;
 
   # Bluetooth
   hardware = {
@@ -464,11 +457,6 @@
     enable = false;
     dockerCompat = false;
     defaultNetwork.settings.dns_enabled = false;
-  };
-
-  # OpenGL
-  hardware.graphics = {
-    enable = true;
   };
 
   console.keyMap = "${keyboardLayout}";
