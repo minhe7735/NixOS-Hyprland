@@ -27,6 +27,7 @@
       "systemd.mask=systemd-vconsole-setup.service"
       "systemd.mask=dev-tpmrm0.device" #this is to mask that stupid 1.5 mins systemd bug
       "nowatchdog" 
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
  	  ];
 
     # This is for OBS Virtual Cam Support
