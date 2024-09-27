@@ -132,12 +132,11 @@ in {
 
 		virt-manager.enable = false;
 
-#steam = {
-#  enable = true;
-#  gamescopeSession.enable = true;
-#  remotePlay.openFirewall = true;
-#  dedicatedServer.openFirewall = true;
-#};
+		steam = {
+			enable = true;
+			gamescopeSession.enable = true;
+		};
+		gamemode.enable = true;
 
 		xwayland.enable = true;
 
@@ -156,8 +155,12 @@ in {
 		mutableUsers = true;
 	};
 
+	documentation.nixos.enable = false;
 	environment.systemPackages = (with pkgs; [
 # System Packages
+
+			protonup
+			discord
 			baobab
 			btrfs-progs
 			clang
@@ -433,7 +436,10 @@ in {
 	console.keyMap = "${keyboardLayout}";
 
 # For Electron apps to use wayland
-	environment.sessionVariables.NIXOS_OZONE_WL = "1";
+	environment.sessionVariables = {
+		STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/user/.steam/root/compatibiliytools.d";
+		NIXOS_OZONE_WL = "1";
+	};
 
 # Open ports in the firewall.
 # networking.firewall.allowedTCPPorts = [ ... ];
