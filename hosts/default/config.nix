@@ -156,9 +156,11 @@ in {
 	};
 
 	documentation.nixos.enable = false;
+
 	environment.systemPackages = (with pkgs; [
 # System Packages
-
+            gh
+            inputs.nixvim.packages.${pkgs.system}.default
 			protonup
 			discord
 			baobab
